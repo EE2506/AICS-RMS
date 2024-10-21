@@ -79,19 +79,19 @@ class ReportingTable extends Component
     public function calculateTotalsGenderCounterTable1()
     {
         $totals = [
-            'FAMILY_HEADS_AND_OTHER_NEEDY_ADULT' => [
+            'FAMILY HEADS AND OTHER NEEDY ADULT' => [
                 'MALE' => ['18-29' => 0, '30-44' => 0, '45-59' => 0],
                 'FEMALE' => ['18-29' => 0, '30-44' => 0, '45-59' => 0]
             ],
-            'MEN/WOMEN_IN_SPECIALLY_DIFFICULT_CIRCUMSTANCES' => [
+            'MEN/WOMEN IN SPECIALLY DIFFICULT CIRCUMSTANCES' => [
                 'MALE' => ['18-29' => 0, '30-44' => 0, '45-59' => 0],
                 'FEMALE' => ['18-29' => 0, '30-44' => 0, '45-59' => 0]
             ],
-        'SENIOR_CITIZENS' && 'SENIOR_CITIZENS (NO_SUBCATEGORIES)' => [
+        'SENIOR CITIZENS' && 'SENIOR CITIZENS (NO SUBCATEGORIES)' => [
                 'MALE' => ['60-70' => 0, '71-79' => 0, '80+' => 0],
                 'FEMALE' => ['60-70' => 0, '71-79' => 0, '80+' => 0]
             ],
-            'CHILDREN_IN_NEED_OF_SPECIAL_PROTECTION' => [
+            'CHILDREN IN NEED OF SPECIAL PROTECTION' => [
                 'MALE' => ['0-13' => 0, '14-17' => 0],
                 'FEMALE' => ['0-13' => 0, '14-17' => 0]
             ],
@@ -99,11 +99,11 @@ class ReportingTable extends Component
                 'MALE' => ['18-30' => 0],
                 'FEMALE' => ['18-30' => 0]
             ],
-            'PERSONS_WITH_DISABILITIES' => [
+            'PERSONS WITH DISABILITIES' => [
                 'MALE' => ['0-13' => 0, '14-17' => 0, '18-29' => 0, '30-44' => 0, '45-59' => 0, '60-70' => 0, '71-79' => 0, '80+' => 0],
                 'FEMALE' => ['0-13' => 0, '14-17' => 0, '18-29' => 0, '30-44' => 0, '45-59' => 0, '60-70' => 0, '71-79' => 0, '80+' => 0]
             ],
-            'PERSONS_LIVING_WITH_HIV/AIDS' => [
+            'PERSONS LIVING WITH HIV/AIDS' => [
                 'MALE' => ['0-13' => 0, '14-17' => 0, '18-29' => 0, '30-44' => 0, '45-59' => 0, '60-70' => 0, '71-79' => 0, '80+' => 0],
                 'FEMALE' => ['0-13' => 0, '14-17' => 0, '18-29' => 0, '30-44' => 0, '45-59' => 0, '60-70' => 0, '71-79' => 0, '80+' => 0]
             ],
@@ -191,6 +191,54 @@ class ReportingTable extends Component
     }
 
 
+    public function countGenderByCategoryTable3()
+    {
+        $categories = [
+            'FAMILY HEADS AND OTHER NEEDY ADULT',
+            'MEN/WOMEN IN SPECIALLY DIFFICULT CIRCUMSTANCES',
+            'SENIOR CITIZENS', // We'll handle 'SENIOR CITIZENS' && 'SENIOR CITIZENS (NO SUBCATEGORIES)' together
+            'CHILDREN IN NEED OF SPECIAL PROTECTION',
+            'YOUTH',
+            'PERSONS WITH DISABILITIES',
+            'PERSONS LIVING WITH HIV AIDS'
+        ];
+
+        $genderCounts = [];
+
+        foreach ($categories as $category) {
+            // Special case for 'SENIOR CITIZENS' and 'SENIOR CITIZENS (NO SUBCATEGORIES)'
+            if ($category === 'SENIOR CITIZENS') {
+                $maleCountTable3 = \App\Models\Client::where(function ($query) {
+                    $query->where('client_category', 'SENIOR CITIZENS')
+                        ->orWhere('client_category', 'SENIOR CITIZENS (NO SUBCATEGORIES)');
+                })->where('sex', 'MALE')->count();
+
+                $femaleCountTable3 = \App\Models\Client::where(function ($query) {
+                    $query->where('client_category', 'SENIOR CITIZENS')
+                        ->orWhere('client_category', 'SENIOR CITIZENS (NO SUBCATEGORIES)');
+                })->where('sex', 'FEMALE')->count();
+            } else {
+                // For other categories
+                $maleCountTable3 = \App\Models\Client::where('client_category', $category)
+                    ->where('sex', 'MALE')
+                    ->count();
+
+                $femaleCountTable3 = \App\Models\Client::where('client_category', $category)
+                    ->where('sex', 'FEMALE')
+                    ->count();
+            }
+
+            $totalCountTable3 = $maleCountTable3 + $femaleCountTable3;
+
+            $genderCounts[$category] = [
+                'male' => $maleCountTable3,
+                'female' => $femaleCountTable3,
+                'total' => $totalCountTable3
+            ];
+        }
+
+        return $genderCounts;
+    }
 
 
 

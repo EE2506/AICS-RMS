@@ -19,8 +19,8 @@ class CreateClientsTable extends Migration
             $table->string('entered_by', 60)->nullable();
             $table->string('client_no', 20)->unique();
             $table->date('date_accomplished')->nullable();
-            $table->string('region', 60);
-            $table->string('province', 60);
+            $table->string('region', 60)->nullable();
+            $table->string('province', 60)->nullable();
             $table->string('city_municipality', 60)->nullable();
             $table->string('barangay', 60)->nullable();
             $table->string('district', 30)->nullable()->nullable();

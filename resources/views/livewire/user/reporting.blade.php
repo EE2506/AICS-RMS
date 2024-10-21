@@ -516,154 +516,25 @@
                         <h2>Table 3: Beneficiaries served per client category</h2>
                         <table>
                             <table class="table table-striped">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th rowspan="2">Client Category</th>
-                                        <th colspan="3">Current Fund</th>
-                                        <th colspan="3">Continuing</th>
-                                        <th colspan="3">TOTAL</th>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <th>Male</th>
-                                        <th>Female</th>
-                                        <th>Total</th>
-                                        <th>Male</th>
-                                        <th>Female</th>
-                                        <th>Total</th>
-                                        <th>Male</th>
-                                        <th>Female</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr class="text-center">
-                                        <td rowspan="3">Family Head and Other Needy Adult (FHONA)</td>
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td></td><td></td><td></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td></td><td></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td></td><td></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td rowspan="3">Women in Especially Difficult Circumstances (WEDC)</td>
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td></td><td></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td></td><td></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td></td><td></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td rowspan="3">Children in Need of Special Protection (CNSP)</td>
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td></td><td></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td></td><td></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td></td><td></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td rowspan="3">Youth in Need of Special Protection (YNSP)</td>
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td></td><td></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td></td><td></td><td></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td></td><td></td><td></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    </tr>
-
-                                   <tr class="text-center">
-                                   <td rowspan="3">Senior Citizen (SC)</td>
-                                   <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                   <td></td><td></td><td></td>
-                                   <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                </tr>
-                                     <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td></td><td></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
+                                    <thead>
+                                        <tr>
+                                            <th>Client Category</th>
+                                            <th>Male</th>
+                                            <th>Female</th>
+                                            <th>Total</th>
                                         </tr>
-                                                <tr class="text-center">
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td></td><td></td><td></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                </tr>
-                                            <tr class="text-center">
-                                                <td rowspan="3">Persons With Disability (PWD)</td>
-                                                <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                <td></td><td></td><td></td>
-                                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($this->countGenderByCategoryTable3() as $category => $counts)
+                                            <tr>
+                                                <td>{{ $category }}</td>
+                                                <td>{{ $counts['male'] }}</td>
+                                                <td>{{ $counts['female'] }}</td>
+                                                <td>{{ $counts['total'] }}</td>
                                             </tr>
-                                            <tr class="text-center">
+                                        @endforeach
+                                    </tbody>
 
-                                                <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td></td><td></td><td></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            </tr>
-                                            <tr class="text-center">
-
-                                                <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                <td></td><td></td><td></td>
-                                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            </tr>
-                                        <tr class="text-center">
-                                            <td rowspan="3">Persons Living with HIV-AIDS (PLHIV)</td>
-
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td></td><td></td><td></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-
-                                        <tr class="text-center">
-
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td></td><td></td><td></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td></td><td></td><td></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        </tr>
 
                                   <tr class="total-row">
                                         <td colspan="1" class="total-row text-left">GRAND TOTAL</td>
