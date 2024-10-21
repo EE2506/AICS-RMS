@@ -204,6 +204,10 @@ class ReportingTable extends Component
         ];
 
         $genderCounts = [];
+            // Variables to hold grand totals
+        $grandTotalMale = 0;
+        $grandTotalFemale = 0;
+        $grandTotal = 0;
 
         foreach ($categories as $category) {
             // Special case for 'SENIOR CITIZENS' and 'SENIOR CITIZENS (NO SUBCATEGORIES)'
@@ -235,7 +239,18 @@ class ReportingTable extends Component
                 'female' => $femaleCountTable3,
                 'total' => $totalCountTable3
             ];
-        }
+                   // Add to grand totals
+        $grandTotalMale += $maleCountTable3;
+        $grandTotalFemale += $femaleCountTable3;
+        $grandTotal += $totalCountTable3;
+    }
+
+    // Add grand totals to the array
+    $genderCounts['grand_total'] = [
+        'male' => $grandTotalMale,
+        'female' => $grandTotalFemale,
+        'total' => $grandTotal];
+
 
         return $genderCounts;
     }

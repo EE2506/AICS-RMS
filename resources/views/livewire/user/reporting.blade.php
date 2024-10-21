@@ -526,21 +526,23 @@
                                     </thead>
                                     <tbody>
                                         @foreach($this->countGenderByCategoryTable3() as $category => $counts)
-                                            <tr>
-                                                <td>{{ $category }}</td>
-                                                <td>{{ $counts['male'] }}</td>
-                                                <td>{{ $counts['female'] }}</td>
-                                                <td>{{ $counts['total'] }}</td>
-                                            </tr>
+                                        @if($category !== 'grand_total') <!-- Exclude 'grand_total' from loop -->
+                                        <tr>
+                                            <td>{{ $category }}</td>
+                                            <td>{{ $counts['male'] }}</td>
+                                            <td>{{ $counts['female'] }}</td>
+                                            <td>{{ $counts['total'] }}</td>
+                                        </tr>
+                                    @endif
                                         @endforeach
                                     </tbody>
 
 
                                   <tr class="total-row">
                                         <td colspan="1" class="total-row text-left">GRAND TOTAL</td>
-                                        <td class="total-row text-center"><!--Male--></td><td class="total-row text-center"><!--Female--></td><td class="total-row text-center"><!--Total--></td>
-                                        <td class="total-row text-center"><!--Male--></td><td class="total-row text-center"><!--Female--></td><td class="total-row text-center"><!--Total--></td>
-                                        <td class="total-row text-center"><!--Male--></td><td class="total-row text-center"><!--Female--></td><td class="total-row text-center"><!--Total--></td>
+                                        <td>{{ $this->countGenderByCategoryTable3()['grand_total']['male'] }}</td>
+                                        <td>{{ $this->countGenderByCategoryTable3()['grand_total']['female'] }}</td>
+                                        <td>{{ $this->countGenderByCategoryTable3()['grand_total']['total'] }}</td>
                                     </tr>
                                 </tbody>
                             </table>
