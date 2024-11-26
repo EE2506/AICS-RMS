@@ -12,15 +12,7 @@ class Settings extends Component
     public $currentPassword;
     public $newPassword;
     public $confirmNewPassword;
-    public $location;
-    public $restrict;
-    public $file;
-    public $administrative;
-    public $financial;
-    public $legal;
-    public $personnel;
-    public $social;
-    public $doc;
+
 
     public function render()
     {
@@ -52,46 +44,6 @@ class Settings extends Component
         $this->confirmNewPassword = '';
 
         session()->flash('message', 'Password changed successfully!');
-    }
-    public function addValue()
-    {
-        $this->validate([
-            'location' => 'sometimes|max:50',
-            'restrict' => 'sometimes|max:50',
-            'file' => 'sometimes|max:50',
-            'administrative' => 'sometimes|max:80',
-            'financial' => 'sometimes|max:80',
-            'legal' => 'sometimes|max:80',
-            'personnel' => 'sometimes|max:80',
-            'social' => 'sometimes|max:80',
-            'doc' => 'sometimes|max:20',
-        ]);
-
-        // Create a new Value model instance and save it to the database
-        Value::create([
-            'location' => $this->location,
-            'restrict' => $this->restrict,
-            'file' => $this->file,
-            'administrative' => $this->administrative,
-            'financial' => $this->financial,
-            'legal' => $this->legal,
-            'personnel' => $this->personnel,
-            'social' => $this->social,
-            'doc' => $this->doc,
-        ]);
-
-        // Reset the form fields
-        $this->location = '';
-        $this->restrict = '';
-        $this->file = '';
-        $this->administrative = '';
-        $this->financial = '';
-        $this->legal = '';
-        $this->personnel = '';
-        $this->social = '';
-        $this->doc = '';
-
-        session()->flash('message', 'Value added successfully!');
     }
 
 }

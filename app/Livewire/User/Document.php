@@ -14,6 +14,8 @@ use Maatwebsite\Excel\HeadingRowFormatter;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
 use App\Imports\PreviewImport;
+use Illuminate\Support\Facades\Auth;
+use App\Models\UserActivityLog;
 
 class Document extends Component
 {
@@ -62,34 +64,52 @@ class Document extends Component
     {
         $this->validate();
 
-    $existingDocument = ModelsDocument::where('document', $this->document->getClientOriginalName())->first();
+        $existingDocument = ModelsDocument::where('document', $this->document->getClientOriginalName())->first();
 
-    if ($existingDocument) {
-        $this->showModal = true;
-        return;
+        if ($existingDocument) {
+            $this->showModal = true;
+            return;
+        }
+
+        $currentDate = Carbon::now()->format('Y-m-d');
+        $this->path = $this->document->store("Documents/{$currentDate}");
+
+        // Save the document details to the database
+        $document = new ModelsDocument([
+            'filetype' => $this->document->getClientOriginalExtension(),
+            'path' => $this->path,
+            'document' => $this->document->getClientOriginalName(),
+        ]);
+
+        if ($document->save()) {
+            // Log the upload activity, including the document ID
+            $this->logActivity(
+                'Upload',
+                'Uploaded document: ' . $document->document);
+
+            // Process the uploaded Excel file
+            Excel::import(new ClientsImport, $this->document);
+
+            session()->flash('success', 'Document saved and data imported successfully');
+
+            $this->deleteLivewireTmp();
+            $this->resetForm();
+        } else {
+            session()->flash('status', 'Error uploading file');
+        }
     }
 
-    $currentDate = Carbon::now()->format('Y-m-d');
-    $this->path = $this->document->store("Documents/{$currentDate}");
-
-    // Save the document details to the database
-    $document = new ModelsDocument([
-        'filetype' => $this->document->getClientOriginalExtension(),
-        'path' => $this->path,
-        'document' => $this->document->getClientOriginalName(),
-    ]);
-
-    if ($document->save()) {
-        // Process the uploaded Excel file
-        Excel::import(new ClientsImport, $this->document);
-
-        session()->flash('success', 'Document saved and data imported successfully');
-        $this->deleteLivewireTmp();
-        $this->resetForm();
-    } else {
-        session()->flash('status', 'Error uploading file');
+    public function logActivity($activityType, $description)
+    {
+        // Create a new log entry for the authenticated user
+        UserActivityLog::create([
+            'user_id' => Auth::id(),
+            'activity_type' => $activityType,
+            'description' => $description,
+            'created_at' => now(),
+        ]);
     }
-}
+
 
     public function archive($documentId)
     {
@@ -98,6 +118,10 @@ class Document extends Component
         if ($document) {
             // Soft delete the document and move it to the recycle bin
             $document->delete();
+
+            // Log the archive activity
+            $this->logActivity('Archive', 'Archived document: ' . $document->document);
+
             session()->flash('success', 'Document archived successfully!');
 
             // Reload the list and recycle bin

@@ -221,32 +221,35 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h2>Table 1: Summary of beneficiaries served with cost, beneficiary category, and age group.</h2>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Category</th>
-                                    <th>Gender</th>
-                                    <th>Age Group</th>
-                                    <th>Total Amount</th>
-                                    <th>Count</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($totals as $category => $genders)
-                                    @foreach ($genders as $gender => $ageGroups)
-                                        @foreach ($ageGroups as $ageGroup => $total)
-                                            <tr>
-                                                <td>{{ $category }}</td>
-                                                <td>{{ $gender }}</td>
-                                                <td>{{ $ageGroup }}</td>
-                                                <td>{{ $total }}</td>
-                                                <td>{{ $counts[$category][$gender][$ageGroup] }}</td>
-                                            </tr>
+                        <table>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Gender</th>
+                                        <th>Age Group</th>
+                                        <th>Count</th>
+                                        <th>Total Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($totals as $category => $genders)
+                                        @foreach ($genders as $gender => $ageGroups)
+                                            @foreach ($ageGroups as $ageGroup => $total)
+                                                <tr>
+                                                    <td>{{ $category }}</td>
+                                                    <td>{{ $gender }}</td>
+                                                    <td>{{ $ageGroup }}</td>
+                                                    <td>{{ $counts[$category][$gender][$ageGroup] }}</td>
+                                                    <td>{{ $total }}</td>
+
+                                                </tr>
+                                            @endforeach
                                         @endforeach
                                     @endforeach
-                                @endforeach
 
-                            </tbody>
+                                </tbody>
+                            </table>
                         </table>
                     </div>
                 </div>
@@ -263,244 +266,30 @@
                         <table>
                             <table class="table table-striped">
                                 <thead>
-                                    <tr class="text-center">
-                                        <th rowspan="2">Service Count</th>
-                                        <th colspan="4">Current Fund</th>
-                                        <th colspan="4">Continuing</th>
-                                        <th colspan="4">TOTAL</th>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <th>Male</th>
-                                        <th>Female</th>
-                                        <th>Total</th>
-                                        <th>Cost</th>
-                                        <th>Male</th>
-                                        <th>Female</th>
-                                        <th>Total</th>
-                                        <th>Cost</th>
-                                        <th>Male</th>
-                                        <th>Female</th>
-                                        <th>Total</th>
-                                        <th>Cost</th>
+                                    <tr>
+                                        <th>Type of Assistance</th>
+                                        <th>Female Total</th>
+                                        <th>Male Total</th>
+                                        <th>Combined Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                                <tr class="text-center">
-                                                    <td rowspan="3">Educational Assistance</td>
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td rowspan="3">Transportation Assistance</td>
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td rowspan="3">Burial Assistance</td>
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-
-                                                </tr><tr class="text-center">
-                                                    <td rowspan="3">Food Assistance</td>
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                                </tr>
-                                            </tr><tr class="text-center">
-                                                <td rowspan="3">Other Cash Assistance</td>
-
-                                                <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                <td></td><td></td><td></td><td></td> <!--Total-->
-                                            </tr>
-                                            <tr class="text-center">
-
-                                                <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                <td></td><td></td><td></td><td></td> <!--Total-->
-                                            </tr>
-                                            <tr class="text-center">
-
-                                                <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                <td></td><td></td><td></td><td></td> <!--Total-->
-                                            </tr>
-                                        </tr><tr class="text-center">
-                                            <td rowspan="3">Hot Meals</td>
-
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
+                                    @foreach ($assistanceData as $type => $totals)
+                                        <tr>
+                                            <td>{{ $type }}</td>
+                                            <td>{{ number_format($totals['FEMALE'], 2) }}</td>
+                                            <td>{{ number_format($totals['MALE'], 2) }}</td>
+                                            <td>{{ number_format($totals['TOTAL'], 2) }}</td>
                                         </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                            <td></td><td></td><td></td><td></td><!--Continuing -->
-                                            <td></td><td></td><td></td><td></td> <!--Total-->
-                                        </tr>
-                                    </tr><tr class="text-center">
-                                        <td rowspan="3">Family Food Packs</td>
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                        <td></td><td></td><td></td><td></td><!--Continuing -->
-                                        <td></td><td></td><td></td><td></td> <!--Total-->
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                    </tr>
-                                </tr><tr class="text-center">
-                                    <td rowspan="3">Hygiene And Sleeping Kits</td>
-
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                </tr>
-                                <tr class="text-center">
-
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                </tr>
-                                <tr class="text-center">
-
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                </tr>
-                            </tr><tr class="text-center">
-                                <td rowspan="3">Assistive Devices And Technologies</td>
-
-                                <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                <td></td><td></td><td></td><td></td><!--Continuing -->
-                                <td></td><td></td><td></td><td></td> <!--Total-->
-                            </tr>
-                            <tr class="text-center">
-
-                                <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                <td></td><td></td><td></td><td></td><!--Continuing -->
-                                <td></td><td></td><td></td><td></td> <!--Total-->
-                            </tr>
-                            <tr class="text-center">
-
-                                <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                            </tr>
-                        </tr><tr class="text-center">
-                            <td rowspan="3">Psychosocial</td>
-
-                            <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                            <td></td><td></td><td></td><td></td><!--Continuing -->
-                            <td></td><td></td><td></td><td></td> <!--Total-->
-                        </tr>
-                        <tr class="text-center">
-
-                            <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                            <td></td><td></td><td></td><td></td><!--Continuing -->
-                            <td></td><td></td><td></td><td></td> <!--Total-->
-                        </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                        <td></td><td></td><td></td><td></td><!--Continuing -->
-                                        <td></td><td></td><td></td><td></td> <!--Total-->
-                                    </tr>
-                                </tr><tr class="text-center">
-                                    <td rowspan="3">Referral</td>
-
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                </tr>
-                                <tr class="text-center">
-
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                </tr>
-                                <tr class="text-center">
-
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Total--></td><td><!--Cost--></td> <!--Current Fund -->
-                                    <td></td><td></td><td></td><td></td><!--Continuing -->
-                                    <td></td><td></td><td></td><td></td> <!--Total-->
-                                </tr>
-                                            <tr class="total-row">
+                                    @endforeach
+                                    <tr class="total-row">
                                         <td colspan="1" class="total-row text-left">GRAND TOTAL</td>
-                                        <td class="total-row text-center"><!--Male--></td><td class="total-row text-center"><!--Female--></td><td class="total-row text-center"><!--Total--></td><td class="total-row text-center"><!--Cost--></td>
-                                        <td class="total-row text-center"><!--Male--></td><td class="total-row text-center"><!--Female--></td><td class="total-row text-center"><!--Total--></td><td class="total-row text-center"><!--Continuing --></td>
-                                        <td class="total-row text-center"><!--Male--></td><td class="total-row text-center"><!--Female--></td><td class="total-row text-center"><!--Total--></td><td class="total-row text-center"><!--Total --></td>
+                                        <td class="total-row text-center">{{ number_format($grandTotalFemale, 2) }}</td>
+                                        <td class="total-row text-center">{{ number_format($grandTotalMale, 2) }} </td>
+                                        <td class="total-row text-center">{{ number_format($grandTotalOverall, 2) }}</td>
                                     </tr>
                                 </tbody>
+
                             </table>
                         </table>
                     </div>
@@ -540,9 +329,9 @@
 
                                   <tr class="total-row">
                                         <td colspan="1" class="total-row text-left">GRAND TOTAL</td>
-                                        <td>{{ $this->countGenderByCategoryTable3()['grand_total']['male'] }}</td>
-                                        <td>{{ $this->countGenderByCategoryTable3()['grand_total']['female'] }}</td>
-                                        <td>{{ $this->countGenderByCategoryTable3()['grand_total']['total'] }}</td>
+                                        <td class="total-row text-center">{{ $this->countGenderByCategoryTable3()['grand_total']['male'] }}</td>
+                                        <td class="total-row text-center">{{ $this->countGenderByCategoryTable3()['grand_total']['female'] }}</td>
+                                        <td class="total-row text-center">{{ $this->countGenderByCategoryTable3()['grand_total']['total'] }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -572,450 +361,56 @@
                                         <th colspan="3">71 to 79</th>
                                         <th colspan="3">80 and above</th>
                                         <th rowspan="2">Grand Total</th>
-
                                     </tr>
                                     <tr class="text-center">
+                                        <!-- age group -->
                                         <th>Male</th>
                                         <th>Female</th>
                                         <th>Total</th>
-                                            <th>Male</th>
-                                            <th>Female</th>
-                                            <th>Total</th>
+                                        <!-- age group -->
                                         <th>Male</th>
                                         <th>Female</th>
                                         <th>Total</th>
-                                            <th>Male</th>
-                                            <th>Female</th>
-                                            <th>Total</th>
+                                        <!-- age group -->
                                         <th>Male</th>
                                         <th>Female</th>
                                         <th>Total</th>
-                                            <th>Male</th>
-                                            <th>Female</th>
-                                            <th>Total</th>
+                                        <!-- age group -->
                                         <th>Male</th>
                                         <th>Female</th>
                                         <th>Total</th>
-                                            <th>Male</th>
-                                            <th>Female</th>
-                                            <th>Total</th>
+                                        <!-- age group -->
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Total</th>
+                                        <!-- age group -->
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Total</th>
+                                        <!-- age group -->
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Total</th>
+                                        <!-- age group -->
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Total</th>
+                                        <!-- age group -->
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                                <tr class="text-center">
-                                                    <td rowspan="3">Educational Assistance</td>
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-
-
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td rowspan="3">Transportation Assistance</td>
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td rowspan="3">Burial Assistance</td>
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-
-                                                </tr><tr class="text-center">
-                                                    <td rowspan="3">Food Assistance</td>
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                                </tr>
-                                                <tr class="text-center">
-
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                                </tr>
-                                            </tr><tr class="text-center">
-                                                <td rowspan="3">Other Cash Assistance</td>
-
-                                                <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                            </tr>
-                                            <tr class="text-center">
-
-                                                <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                            </tr>
-                                            <tr class="text-center">
-
-                                                <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                            </tr>
-                                        </tr><tr class="text-center">
-                                            <td rowspan="3">Hot Meals</td>
-
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--male--></td>
+                                    @foreach ($clients as $client)
+                                        <tr>
+                                            <td>{{ $client['type_of_assistance'] }}</td>
+                                            @foreach (['0-13', '14-17', '18-29', '30-44', '45-59', '60-70', '71-79', '80+'] as $group)
+                                                <td>{{ $client["{$group}_male"] }}</td>
+                                                <td>{{ $client["{$group}_female"] }}</td>
+                                                <td>{{ $client["{$group}_total"] }}</td>
+                                            @endforeach
+                                            <td>{{ $client['grand_total'] }}</td>
                                         </tr>
-                                        <tr class="text-center">
+                                    @endforeach
 
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--male--></td>
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--male--></td>
-                                        </tr>
-                                    </tr><tr class="text-center">
-                                        <td rowspan="3">Family Food Packs</td>
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        <td><!--male--></td>
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        <td><!--male--></td>
-                                    </tr>
-                                </tr><tr class="text-center">
-                                            <td rowspan="3">Hygiene And Sleeping Kits</td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                                    <td><!--male--></td>
-                                        </tr>
-                                <tr class="text-center">
-
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td>
-                                </tr>
-
-                                <tr class="text-center">
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td>
-                                </tr>
-
-
-                                <tr class="text-center">
-                                            <td rowspan="3">Assistive Devices And Technologies</td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                            <td><!--male--></td>
-                                </tr>
-
-                                <tr class="text-center">
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td>
-                            </tr>
-
-                            <tr class="text-center">
-
-                                <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                <td><!--male--></td>
-                            </tr>
-
-
-                            <tr class="text-center">
-                            <td rowspan="3">Psychosocial</td>
-
-                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                            <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                            <td><!--male--></td>
-                            </tr>
-
-                                    <tr class="text-center">
-
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                        <td><!--male--></td>
-                                    </tr>
-
-                                <tr class="text-center">
-
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td>
-                                </tr>
-
-                                <tr class="text-center">
-                                    <td rowspan="3">Referral</td>
-
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td>
-                                </tr>
-
-                                <tr class="text-center">
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td>
-                                </tr>
-
-                                <tr class="text-center">
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--Male--></td><td><!--Female--></td><td><!--Female--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td>
-                                    <td><!--male--></td>
-                                </tr>
                                             <tr class="total-row">
                                         <td colspan="1" class="total-row text-left">GRAND TOTAL</td>
                                         <td class="total-row text-center"></td><!--male--><td class="total-row text-center"><!--Female--></td><td class="total-row text-center"><!-- total--></td><td class="total-row text-center"><!--male--></td><td class="total-row text-center"><!--female--></td><td class="total-row text-center"><!--total--></td><td class="total-row text-center"><!--male--></td><td class="total-row text-center"><!--female--></td><td class="total-row text-center"><!--total--></td><td class="total-row text-center"><!--male--></td><td class="total-row text-center"><!--female--></td><td class="total-row text-center"><!--total--></td>
@@ -1065,7 +460,7 @@
 
                                             <tr class="total-row">
                                         <td colspan="1" class="total-row text-left">GRAND TOTAL</td>
-                                        <td class="total-row text-center"></td><td class="total-row text-center"></td><td class="total-row text-center"></td>
+                                        <td class="total-row text-center">{{$GrandTotalMaleTable5}}</td><td class="total-row text-center">{{$GrandTotalFemaleTable5}}</td><td class="total-row text-center">{{$GrandTotalTable5}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1121,7 +516,7 @@
 
                                             <tr class="total-row">
                                         <td colspan="1" class="total-row text-left">GRAND TOTAL</td>
-                                        <td class="total-row text-center"></td><td class="total-row text-center"></td><td class="total-row text-center"></td><td class="total-row text-center"></td><td class="total-row text-center"></td><td class="total-row text-center"></td>
+                                        <td class="total-row text-center"><!--male-->{{$GrandTotalMaleTable6}}</td><td class="total-row text-center"><!--male AMOUNT-->&#8369; {{$GrandTotalMaleAmountTable6}}</td><td class="total-row text-center"><!--Female-->{{$GrandTotalFemaleTable6}}</td><td class="total-row text-center"><!--female Amount-->&#8369; {{$GrandTotalFemaleAmountTable6}}</td><td class="total-row text-center"><!--Total Gender-->{{$GrandTotalCountTable6}}</td><td class="total-row text-center"><!--Total Amount-->&#8369; {{$GrandTotalAmountTable6}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1129,1116 +524,95 @@
                     </div>
                 </div>
             </div>
- <!-- Table 7 -->
-
-            <div id="table7" class="tab-content">
-                <table>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr class="text-center">
-                                <th rowspan="2">Service Count</th>
-                                <th colspan="4">Current Fund</th>
-                                <th colspan="4">Continuing</th>
-                                <th colspan="4">TOTAL</th>
-                            </tr>
-                            <tr class="text-center">
-                                <th>Male</th>
-                                <th>Female</th>
-                                <th>Total</th>
-                                <th>Cost</th>
-                                <th>Male</th>
-                                <th>Female</th>
-                                <th>Total</th>
-                                <th>Cost</th>
-                                <th>Male</th>
-                                <th>Female</th>
-                                <th>Total</th>
-                                <th>Cost</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-
-
-
-                            <tr class="text-center">
-                                <td rowspan="3">Financial Assistance</td>
-
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            </tr>
-                            <tr class="text-center">
-
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            </tr>
-                            <tr class="text-center">
-
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            </tr>
-
-                                        <tr class="text-center">
-                                            <td rowspan="3">Educational Assistance</td>
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-                                            <td rowspan="3">Medical Assistance</td>
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-                                            <td rowspan="3">Transportation Assistance</td>
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-                                            <td rowspan="3">Burial Assistance</td>
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr><tr class="text-center">
-                                            <td rowspan="3">Food Assistance</td>
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                        <tr class="text-center">
-
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        </tr>
-                                    </tr><tr class="text-center">
-                                        <td rowspan="3">Other Cash Assistance</td>
-
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td rowspan="3">Material Assistance</td>
-
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                </tr><tr class="text-center">
-                                    <td rowspan="3">Hot Meals</td>
-
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
+    <!-- Table 7 -->
+<div id="table7" class="tab-content">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2>Table 7. Summary of Assistance provided with cost.</h2>
+                <table class="table table-striped">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type of Assistance</th>
+                                    <th>Female Count</th>
+                                    <th>Male Count</th>
+                                    <th>Total Count</th>
                                 </tr>
-                                <tr class="text-center">
+                            </thead>
+                            <tbody>
+                                @foreach ($assistanceCounterDataTable7 as $type => $counts)
+                                    <tr>
+                                        <td>{{ $type }}</td>
+                                        <td>{{ $counts['FEMALE'] }}</td>
+                                        <td>{{ $counts['MALE'] }}</td>
+                                        <td>{{ $counts['TOTAL'] }}</td>
+                                    </tr>
+                                @endforeach
 
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                </tr>
-                                <tr class="text-center">
 
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                </tr>
-                            </tr><tr class="text-center">
-                                <td rowspan="3">Family Food Packs</td>
 
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            </tr>
-                            <tr class="text-center">
-
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            </tr>
-                            <tr class="text-center">
-
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            </tr>
-                        </tr><tr class="text-center">
-                            <td rowspan="3">Hygiene And Sleeping Kits</td>
-
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                        </tr>
-                        <tr class="text-center">
-
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                        </tr>
-                        <tr class="text-center">
-
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                        </tr>
-                    </tr><tr class="text-center">
-                        <td rowspan="3">Assistive Devices And Technologies</td>
-
-                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                    </tr>
-                    <tr class="text-center">
-
-                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                    </tr>
-                    <tr class="text-center">
-
-                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                    </tr>
-                </tr><tr class="text-center">
-                    <td rowspan="3">Psychosocial</td>
-
-                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                </tr>
-                <tr class="text-center">
-
-                    <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                </tr>
-                            <tr class="text-center">
-
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            </tr>
-                        </tr><tr class="text-center">
-                            <td rowspan="3">Referral</td>
-
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                        </tr>
-                        <tr class="text-center">
-
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                        </tr>
-                        <tr class="text-center">
-
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                        </tr>
-                                    <tr class="total-row">
-                                <td colspan="1" class="total-row text-left">GRAND TOTAL</td>
-                                <td class="total-row text-center">33</td><td class="total-row text-center">59</td><td class="total-row text-center">92</td><td class="total-row text-center">1,782,497.89</td>
-                                <td class="total-row text-center">-</td><td class="total-row text-center">-</td><td class="total-row text-center">-</td><td class="total-row text-center">-</td>
-                                <td class="total-row text-center">33</td><td class="total-row text-center">59</td><td class="total-row text-center">92</td><td class="total-row text-center">1,782,497.89</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            </div>
+                                    <tfoot>
+                                        <tr class="total-row">
+                                            <th class="total-row text-center">Grand Total</th>
+                                            <th class="total-row text-center">{{ $grandTotalFemaleCountTable7 }}</th>
+                                            <th class="total-row text-center">{{ $grandTotalMaleCountTable7 }}</th>
+                                            <th class="total-row text-center">{{ $grandTotalCountTable7 }}</th>
+                                        </tr>
+                                    </tfoot>
+                    </tbody>
+                </table>
+            </table>
+        </div>
+    </div>
+</div>
 
   <!-- Table 8 -->
-  <div class="table-container">
+<div class="table-container">
             <div id="table8" class="tab-content">
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <h2>Table 8: Summary of Subcategory provided with cost.</h2>
                             <table class="table table-striped table responsive">
                                 <thead>
-                                    <tr class="text-center">
-                                        <th rowspan="2">Client Category</th>
-                                        <th rowspan="2">Client sub-category</th>
-                                        <th colspan="4">Current Fund</th>
-                                        <th colspan="4">Continuing</th>
-                                        <th colspan="4">TOTAL</th>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <th>Male</th>
-                                        <th>Female</th>
-                                        <th>Total</th>
-                                        <th>Cost</th>
-                                        <th>Male</th>
-                                        <th>Female</th>
-                                        <th>Total</th>
-                                        <th>Cost</th>
-                                        <th>Male</th>
-                                        <th>Female</th>
-                                        <th>Total</th>
-                                        <th>Cost</th>
-
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Subcategory</th>
+                                        <th>Male Count</th>
+                                        <th>Female Count</th>
+                                        <th>Total Count</th>
+                                        <th>Total Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="text-center">
-                                        <td rowspan="17">Family Heads and Other Needy Adult (FHONA)</td>
-                                        <td>Victims of Disaster</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Internally Displaced Family</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Solo Parent</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Victims of Illegal Recruitment</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Surrendered drug users</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Repatriated OFW</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Killed in Action (KIA)</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Wounded in Action (WIA)</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>NONE OF THE ABOVE</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Indigenous People</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Individuals with Cancer</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-
-                                        <td>Person of Concerns - Asylum Seeker</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-
-                                        <td>Former Rebels</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Dialysis Patients</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Tuberculosis Patients</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Refugees</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Stateless Persons</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td rowspan="21">Men/Women in Specially Difficult Circumstances (WEDC)</td>
-                                        <td>Sexually-abused</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Physically-abused/maltreated/battered</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Victims of Illegal Recruitment</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Victims of involuntary prostitution</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Victims of armed conflict</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Victims of trafficking</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Others specify</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Surrendered drug users</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Repatriated OFW</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Killed in Action (KIA)</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Wounded in Action (WIA)</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>NONE OF THE ABOVE</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Indigenous People</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Individuals with Cancer</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-
-                                        <td>Person of Concerns - Asylum Seeker</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Former Rebels</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Dialysis Patients</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-
-                                        <td>Tuberculosis Patients</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Refugees</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Stateless Persons</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-
-                                        <td>Solo Parent</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-
-
-                                    <tr class="text-center">
-                                        <td rowspan="27">Children in Need of Special Protection (CNSP)</td>
-                                        <td>Abandoned</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Neglected</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Voluntary Committed/Surrendered</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Sexually-Abused</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Sexually-Exploited</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Physically-abused/maltreated/battered</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Children in Situations of Armed Conflict</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Victims of Child Labor</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Victims of Child Trafficking</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Street Children</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Victims of Illegal Recruitment</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-
-                                        <td>Children with HIV/AIDS</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-
-                                        <td>Children with Disabilities</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Children in Conflict with the Law (CICL)</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Surrendered drug users</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Repatriated OFW</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Killed in Action (KIA)</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Wounded in Action (WIA)</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>NONE OF THE ABOVE</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Indigenous People</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Individuals with Cancer</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Asylum Seeker</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Former Rebels</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Dialysis Patients</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Tuberculosis Patients</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Refugees</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Stateless Persons</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td rowspan="18">Youth (YNSP)</td>
-                                        <td>Children in Conflict with the Law (9 to &lt; 18 yrs. old)</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-
-                                    <tr class="text-center">
-                                        <td>Out of School Youth</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Pre-delinquent Youth</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Victims of Illegal Recruitment</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Surrendered drug users</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Repatriated OFW</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Killed in Action (KIA)</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Wounded in Action (WIA)</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>NONE OF THE ABOVE</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Student</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Indigenous People</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Individuals with Cancer</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Asylum Seeker</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Former Rebels</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Dialysis Patients</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Tuberculosis Patients</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Refugees</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Stateless Persons</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td rowspan="9">Senior Citizens (SC)</td>
-                                        <td>NONE OF THE ABOVE</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Indigenous People</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Individuals with Cancer</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Asylum Seeker</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Former Rebels</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Dialysis Patients</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Tuberculosis Patients</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Refugees</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Stateless Persons</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td rowspan="11">Persons with Disabilities (PWD)</td>
-                                        <td>Orthopedically handicapped</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                            <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Hearing/Speech impaired</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Visually impaired</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Mentally challenged</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Others specify</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Victims of Illegal Recruitment</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Surrendered drug users</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Repatriated OFW</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Killed in Action (KIA)</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Wounded in Action (WIA)</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>NONE OF THE ABOVE</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-
-
-                                    <tr class="text-center">
-                                        <td rowspan="9">Persons Living with HIV-AIDS (PLHIV)</td>
-                                        <td>Individuals with Cancer</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Indigenous People</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Tuberculosis Patients</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Asylum Seeker</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Former Rebels</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Dialysis Patients</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Refugees</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>Person of Concerns - Stateless Persons</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="text-center">
-                                        <td>NONE OF THE ABOVE</td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                        <td><!--male--></td><td><!--Female--></td><td><!--TOTAL--></td><td></td>
-                                    </tr>
-
-                                    <tr class="total-row">
-                                        <td colspan="2" class="total-row text-left">GRAND TOTAL</td>
-                                        <td class="total-row text-center">-</td><td class="total-row text-center">-</td><td class="total-row text-center">-</td><td class="total-row text-center">-</td>
-                                        <td class="total-row text-center">-</td><td class="total-row text-center">-</td><td class="total-row text-center">-</td><td class="total-row text-center">-</td>
-                                        <td class="total-row text-center">-</td><td class="total-row text-center">-</td><td class="total-row text-center">-</td><td class="total-row text-center">-</td>
-                                    </tr>
+                                    @foreach ($data as $category => $details)
+                                        @php $subcategories = $details['subcategories']; @endphp
+                                        @if ($subcategories->isNotEmpty())
+                                            @php $rowspan = $subcategories->count(); @endphp
+                                            @foreach ($subcategories as $index => $subcategory)
+                                                <tr>
+                                                    @if ($index === 0)
+                                                        <td rowspan="{{ $rowspan }}">{{ $category }}</td>
+                                                    @endif
+                                                    <td>{{ $subcategory['name'] }}</td>
+                                                    <td>{{ $subcategory['male_count'] }}</td>
+                                                    <td>{{ $subcategory['female_count'] }}</td>
+                                                    <td>{{ $subcategory['total_count'] }}</td>
+                                                    <td>{{ number_format($subcategory['total_amount'], 2) }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td rowspan="1">{{ $category }}</td>
+                                                <td colspan="5">No data available for this category.</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
                                 </tbody>
-                            </table>
+                                </table>
                         </div>
                     </div>
                 </div>
+</div>
 
     <script>
         function showTab(tabId) {

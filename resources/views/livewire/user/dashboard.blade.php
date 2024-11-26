@@ -223,22 +223,8 @@ function captureGraph() {
                     </div>
                 </div>
 
-                <!-- Client With Most Assistance Release Card -->
-                <div class="col-xl-3 col-md-6 mb-4" style="height: 130px;">
-                    <div class="card border-left-primary shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2 text-center">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Client With Most Assistance Release</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $table3ClientCategoryWithMostAssistanceReleased }}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-file fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
             </div>
         </div>
 
@@ -738,17 +724,17 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('DOMContentLoaded', function () {
         // Data for Client Category Distribution
         let clientCategoryData = @json($clientCategoryData);
-        let clientCategories = Object.keys(clientCategoryData);
+        let clientCategories = Object.keys(clientCategoryData);  // Short labels
         let assistanceAmounts = Object.values(clientCategoryData);
 
-        // Pie Chart 1: Client Category Distribution
+        // Bar Chart: Client Category Distribution
         var ctx1 = document.getElementById('table1Piechart1').getContext('2d');
         var table1Piechart1 = new Chart(ctx1, {
             type: 'bar',
             data: {
                 labels: clientCategories,
                 datasets: [{
-                    label: 'Client With Most Assistance Released',  // Label with no red box
+                    label: 'Client With Most Assistance Released',
                     data: assistanceAmounts,
                     backgroundColor: ['#DC143C', '#ffcc00', '#223D8D', '#E6F69D', '#ef8585e2', '#223D8D', '#2D87BB'],
                     borderColor: ['#e6e6e6'],
@@ -757,12 +743,12 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,  // Allow the chart to resize properly
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'left',
                         labels: {
-                            boxWidth: 0,  // Remove the red box
+                            boxWidth: 0,
                             padding: 10,
                             font: { size: 12 }
                         }
@@ -781,45 +767,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 scales: {
                     x: {
                         ticks: {
-                            autoSkip: false,  // Ensure all labels are shown
+                            autoSkip: false,
                         }
                     },
                     y: {
                         beginAtZero: true,
                         ticks: {
                             callback: function(value) {
-                                return 'PHP ' + value.toLocaleString();  // Format y-axis labels
+                                return 'PHP ' + value.toLocaleString();
                             }
                         }
                     }
-                },
-                onResize: function(chart, size) {
-                    chart.options.plugins.legend.labels.font.size = size.width < 500 ? 10 : 12;  // Adjust font size based on screen width
-                    chart.update();
                 }
             }
         });
 
-        // Handle screen resizing to prevent chart from "messing up"
-        window.addEventListener('resize', function () {
-            table1Piechart1.resize();  // Force chart to resize on window adjustments
-        });
-
         // Data for Age Bracket Distribution
         let ageBracketData = @json($ageBracketData);
-
-        let ageBracketLabels = {
-            '0-13': '0-13',
-            '14-17': '14-17',
-            '18-29': '18-29',
-            '30-44': '30-44',
-            '45-59': '45-59',
-            '60-70': '60-70',
-            '71-79': '71-79',
-            '80+': '80 and above'
-        };
-
-        let ageBrackets = Object.keys(ageBracketLabels).map(label => ageBracketLabels[label]);
+        let ageBracketLabels = ['0-13', '14-17', '18-29', '30-44', '45-59', '60-70', '71-79', '80+'];
         let clientCounts = Object.values(ageBracketData);
 
         // Pie Chart 2: Age Distribution Per Gender
@@ -827,7 +792,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var table1Piechart2 = new Chart(ctx2, {
             type: 'pie',
             data: {
-                labels: ageBrackets,
+                labels: ageBracketLabels,
                 datasets: [{
                     label: 'Number of Clients',
                     data: clientCounts,
@@ -838,12 +803,12 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,  // Allow the chart to resize properly
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'left',
                         labels: {
-                            boxWidth: 0,  // Remove the red box
+                            boxWidth: 0,
                             padding: 10,
                             font: { size: 12 }
                         }
@@ -853,20 +818,17 @@ document.addEventListener('DOMContentLoaded', function () {
                             label: context => `${context.label}: ${context.raw.toLocaleString()} clients`
                         }
                     }
-                },
-                onResize: function(chart, size) {
-                    chart.options.plugins.legend.labels.font.size = size.width < 500 ? 10 : 12;  // Adjust font size based on screen width
-                    chart.update();
                 }
             }
         });
 
-        // Handle screen resizing to prevent chart from "messing up"
+        // Resize event handling for both charts
         window.addEventListener('resize', function () {
-            table1Piechart2.resize();  // Force chart to resize on window adjustments
+            table1Piechart1.resize();
+            table1Piechart2.resize();
         });
     });
-</script>
+    </script>
 
 
 

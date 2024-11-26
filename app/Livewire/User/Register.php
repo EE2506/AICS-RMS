@@ -22,9 +22,9 @@ class Register extends Component
     public function create()
     {
         $this->validate([
-            'fname' => ['required', 'regex:/^[a-zA-Z]+$/', 'min:10', 'max:20'],
-            'lname' => ['required', 'regex:/^[a-zA-Z-]+$/', 'min:10', 'max:20'],
-            'email' => ['required', 'email', 'unique:users,email', 'max:45'],
+            'fname' => ['required', 'regex:/^[a-zA-Z]+$/', 'min:2', 'max:20'],
+            'lname' => ['required', 'regex:/^[a-zA-Z-]+$/', 'min:2', 'max:20'],
+            'email' => ['required', 'email', 'unique:users,email', 'max:20'],
             'password' => ['required', 'string', 'min:8', 'max:20'],
         ]);
 

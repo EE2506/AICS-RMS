@@ -115,7 +115,7 @@
         .input-group .btn-primary i {
             margin-right: 5px;
         }
-        
+
             /* Custom header styling to make it blue */
             .table-header {
             background-color: #0654a8; /* Blue background for header */
@@ -132,7 +132,7 @@
             }
             .table th a {
                 color: #fff; /* White text color */
-                text-align: center; 
+                text-align: center;
             }/* Center-align header text */
     </style>
 </div>

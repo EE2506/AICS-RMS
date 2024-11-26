@@ -17,11 +17,14 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
         'password',
-        'custom_token', // Add the new column here
+        'custom_token',
+        'last_login',
+
     ];
 
     /**
@@ -42,4 +45,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Define a one-to-many relationship with UserActivityLog
+     */
+    public function activityLogs()
+    {
+        return $this->hasMany(UserActivityLog::class);
+    }
 }

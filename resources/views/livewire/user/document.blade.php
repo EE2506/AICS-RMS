@@ -73,6 +73,9 @@
 
         <div class="card shadow-sm">
             <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h1 class="h4 text-gray-700 font-weight-bold">Documents</h1>
+                </div>
             <table class="table mt-4 text-center table table-bordered table-responsive">
                 <thead class="table-header">
                 <tr>

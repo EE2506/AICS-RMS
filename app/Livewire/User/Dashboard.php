@@ -352,27 +352,31 @@ public $genderCountOnsite, $amountOnsite, $genderCountOffsite, $amountOffsite,  
 }
 
 
-    public function getClientCategoryWithMostAssistanceReleased()
-    {
-        $clientCategories = [
-            'Family Heads and Other Needy Adult (FHONA)',
-            'Men/Women in Specially Difficult Circumstances (WEDC)',
-            'Children in Need of Special Protection (CNSP)',
-            'Youth (YNSP)',
-            'Senior Citizens (SC)',
-            'Persons with Disabilities (PWD)',
-            'Persons Living with HIV-AIDS (PLHIV)',
-        ];
+public function getClientCategoryWithMostAssistanceReleased()
+{
+    // Define categories with short labels
+    $clientCategories = [
 
-        $categoryCounts = [];
-        foreach ($clientCategories as $category) {
-            $count = Client::where('client_category', $category)->count();
-            $categoryCounts[$category] = $count;
-        }
+       'FHONA',
+       'WEDC',
+       'CNSP',
+       'YNSP',
+       'SC',
+       'PWD',
+       'PLHIV',
 
-        $maxCategory = array_keys($categoryCounts, max($categoryCounts))[0];
-        return $maxCategory;
+
+    ];
+
+    $categoryCounts = [];
+    foreach ($clientCategories as $fullLabel => $shortLabel) {
+        $count = Client::where('client_category', $fullLabel)->count();
+        $categoryCounts[$shortLabel] = $count;
     }
+
+    return $categoryCounts;
+}
+
 
     use WithFileUploads;
 

@@ -32,7 +32,7 @@ class BeneficiaryTable extends Component
         $this->resetPage(); // Reset pagination when search term changes
     }
 
-   
+
     public function render()
     {
         $clients = Client::where('client_no', 'like', '%' . $this->search . '%')

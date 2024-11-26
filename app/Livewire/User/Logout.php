@@ -3,6 +3,7 @@
 namespace App\Livewire\User;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Logout extends Component

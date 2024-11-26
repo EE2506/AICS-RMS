@@ -5,6 +5,8 @@ use App\Models\DashboardReportExports;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class DashboardReportExport extends Component
 {

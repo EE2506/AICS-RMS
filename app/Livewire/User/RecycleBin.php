@@ -1,11 +1,12 @@
 <?php
 
-
 namespace App\Livewire\User;
 
 use App\Models\Document;
+use App\Models\UserActivityLog;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class RecycleBin extends Component
 {
@@ -47,6 +48,11 @@ class RecycleBin extends Component
         $document = Document::onlyTrashed()->findOrFail($this->documentId);
         $document->restore();
 
+        // Log the document restoration activity
+
+        $this->logActivity(Auth::user(), 'Restore', 'Restored document: ' . $document->document);
+
+
         session()->flash('success', 'Document restored successfully!');
         $this->resetModal();
         $this->dispatch('documentRestored'); // Emit an event to refresh the list or perform additional actions
@@ -72,5 +78,21 @@ class RecycleBin extends Component
             'recycleBinDocuments' => $recycleBinDocuments,
         ])->layout('layouts.user-app');
     }
-}
 
+    // Log activity method
+
+    public function logActivity($user, $activityType, $description)
+    {
+        // Ensure $activityType is a string
+        if (is_array($activityType) || is_object($activityType)) {
+            $activityType = json_encode($activityType);
+        }
+
+        // Create the log entry
+        $user->activityLogs()->create([
+            'activity_type' => $activityType, // This should be a string like 'restore'
+            'description' => $description, // This can be a message like "Restored document with ID: {document_id}"
+        ]);
+    }
+
+}

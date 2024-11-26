@@ -17,9 +17,14 @@ use App\Livewire\User\Register as Register;
 use App\Http\Controllers\ExportController;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AICSExport;
+use App\Http\Controllers\LogController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
+use App\Livewire\User\Logout;
+use Illuminate\Auth\Events\Login;
+use App\Livewire\User\Logs;
+use App\Livewire\Admin\AdLogs;
 
 // Admin login route as default for root URL
 Route::get('/', UserLogin::class)->name('user.login');
@@ -37,11 +42,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/recycle-bin', RecycleBin::class)->name('recyclebin');
     Route::get('/user/beneficiary-table', BeneficiaryTable::class)->name('user.BeneficiaryTable');
     Route::get('/user/reporting', ReportingTable::class)->name('user.ReportingTable');
+
     Route::get('/export',[AICSExport::class, 'export'])->name('export') ;
     Route::prefix('user/dashboard')->group(function () {
         Route::get('/', UserDashboard::class)->name('user.dashboard');
         Route::post('/save-image', [UserDashboard::class, 'saveImage'])->name('user.dashboard.save-image');
         Route::get('/download-pdf/{reportId}', [UserDashboard::class, 'downloadPdf'])->name('user.dashboard.download-pdf');
+        Route::get('/logs', Logs::class)->name('user.logs');
+
+
     });
 });
 
@@ -57,6 +66,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/recyclebin', Recyclebin::class)->name('admin.recyclebin');
     Route::get('/admin/settings', Settings::class)->name('admin.settings');
     Route::get('/documents/view/{id}', AdminDocument::class)->name('documents.view');
+    Route::get('/logs', AdLogs::class)->name('admin.logs');
 });
 
 Route::get('/get-document-content/{documentId}', [AdminDocument::class, 'getDocumentContent'])

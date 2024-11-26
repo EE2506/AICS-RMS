@@ -19,8 +19,8 @@ class Login extends Component
         {
             // $admins = new Admin();
             $this->validate([
-                'username' => ['required', 'string', 'max:12', 'min:3'],
-                'password' => ['required', 'string', 'max:12', 'min:3'],
+                'username' => ['required', 'string', 'max:20', 'min:5'],
+                'password' => ['required', 'string', 'max:20', 'min:5'],
             ]);
             $admins = Auth::guard('admin')->attempt(['username' => $this->username, 'password' => $this->password]);
             if ($admins) {
