@@ -352,7 +352,7 @@ private function getAgeGroup($category, $age)
     public function typeofAssistancetable4()
 {
    // Define the age groups and their corresponding ranges
-   $ageGroups = [
+    $ageGroups = [
     '0-13' => [0, 13],
     '14-17' => [14, 17],
     '18-29' => [18, 29],
@@ -387,12 +387,12 @@ foreach ($typesOfAssistance as $type) {
 
     foreach ($ageGroups as $group => [$minAge, $maxAge]) {
         // Fetch the male and female counts from the database
-        $maleCount = \App\Models\Client::where('type_of_assistance1', $type)
+        $maleCount = Client::where('type_of_assistance1', $type)
             ->where('sex', 'Male')
             ->whereBetween('age', [$minAge, $maxAge])
             ->sum('amount1') ?? 0;
 
-        $femaleCount = \App\Models\Client::where('type_of_assistance1', $type)
+        $femaleCount = Client::where('type_of_assistance1', $type)
             ->where('sex', 'Female')
             ->whereBetween('age', [$minAge, $maxAge])
             ->sum('amount1') ?? 0;
@@ -490,8 +490,8 @@ $this->clients = $clients;
                 'Victims of Illegal Recruitment',
                 'Surrendered drug users',
                 'Repatriated OFW',
-                'Killed in Action (KIA)',
-                'Wounded in Action (WIA)',
+                'Killed in Action',
+                'Wounded in Action',
                 'NONE OF THE ABOVE',
                 'Indigenous People',
                 'Individuals with Cancer',
@@ -512,8 +512,8 @@ $this->clients = $clients;
                 'Others specify',
                 'Surrendered drug users',
                 'Repatriated OFW',
-                'Killed in Action (KIA)',
-                'Wounded in Action (WIA)',
+                'Killed in Action',
+                'Wounded in Action',
                 'NONE OF THE ABOVE',
                 'Indigenous People',
                 'Individuals with Cancer',
@@ -544,8 +544,8 @@ $this->clients = $clients;
                 'Victims of Illegal Recruitment',
                 'Surrendered drug users',
                 'Repatriated OFW',
-                'Killed in Action (KIA)',
-                'Wounded in Action (WIA)',
+                'Killed in Action',
+                'Wounded in Action',
                 'NONE OF THE ABOVE',
             ],
             'PERSONS LIVING WITH HIV-AIDS' => [
@@ -570,8 +570,8 @@ $this->clients = $clients;
                     return strtolower($client->subcategory) === strtolower($subcategory);
                 });
 
-                $maleCount = $filteredClients->where('gender', 'male')->count();
-                $femaleCount = $filteredClients->where('gender', 'female')->count();
+                $maleCount = $filteredClients->where('gender', 'MALE')->count();
+                $femaleCount = $filteredClients->where('gender', 'FEMALE')->count();
                 $totalAmount = $filteredClients->sum('amount1');
 
                 return [$subcategory => [

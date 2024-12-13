@@ -13,11 +13,16 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Reader\Xls;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class Dashboard extends Component
 
 {
-    public $selectedDate;
+    public $startDate = '';
+    public $endDate = '';
+
 
     public $totalDocument, $totalRecycles, $totalMedical, $totalFuneral, $totalFoodAssistance;
     public $totalServedClients,$totalAmountAssistance, $mostRequestedAssistance, $dobData;
@@ -69,7 +74,7 @@ public $genderCountOnsite, $amountOnsite, $genderCountOffsite, $amountOffsite,  
 
 
 
-    public function mount()
+public function mount()
     {
         $this->totalServedClients = Client::count('id');
         $this->totalAmountAssistance = '₱' . number_format(Client::sum('amount1'), 2);
@@ -382,42 +387,99 @@ public function getClientCategoryWithMostAssistanceReleased()
 
     public $image;
 
+
     public function saveImage()
     {
         $this->validate([
-            'image' => 'required|image|max:2048', // 2MB Max
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // 2MB Max
         ]);
 
         $path = $this->image->store('dashboards', 'public');
 
         $report = DashboardReportExports::create([
             'image_path' => $path,
-            // Add other necessary fields
         ]);
 
         return response()->json(['reportId' => $report->id]);
     }
 
-    public function downloadPdf($reportId)
+    public function exportFilteredReport()
     {
-        $report = DashboardReportExports::findOrFail($reportId);
-        $imageFullPath = Storage::disk('public')->path($report->image_path);
+        // Filter data based on date range
+        $query = DashboardReportExports::query();
 
-        $pdf = Pdf::loadView('pdf.dashboard', ['imagePath' => $imageFullPath]);
+        if ($this->startDate && $this->endDate) {
+            $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
+        }
 
-        $pdfFileName = 'dashboard-' . $reportId . '-' . time() . '.pdf';
-        $pdfPath = 'pdfs/' . $pdfFileName;
+        $filteredReports = $query->orderBy('created_at', 'desc')->get();
 
-        Storage::disk('public')->put($pdfPath, $pdf->output());
+        // Create a new spreadsheet
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle('Filtered Reports');
 
-        $report->update(['pdf_path' => $pdfPath]);
+        // Set headers
+        $headers = ['Report ID', 'Image Path', 'Created At'];
+        $sheet->fromArray($headers, null, 'A1');
 
-        return response()->download(Storage::disk('public')->path($pdfPath), $pdfFileName);
+        // Populate data
+        $data = $filteredReports->map(function ($report) {
+            return [
+                $report->id,
+                $report->image_path,
+                $report->created_at->format('Y-m-d H:i:s'),
+            ];
+        })->toArray();
+
+        $sheet->fromArray($data, null, 'A2');
+
+        // Style the header
+        $headerStyle = [
+            'font' => [
+                'bold' => true,
+                'color' => ['rgb' => 'FFFFFF'],
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '0654A8'],
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ],
+        ];
+
+        $sheet->getStyle('A1:C1')->applyFromArray($headerStyle);
+
+        // Set column widths
+        foreach (range('A', 'C') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
+
+        // Save the file temporarily
+        $fileName = 'filtered_reports_' . now()->format('Y-m-d_H-i-s') . '.xlsx';
+        $tempFile = storage_path("app/public/{$fileName}");
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($tempFile);
+
+        // Return the file as a download
+        return response()->download($tempFile)->deleteFileAfterSend(true);
     }
 
 
-        public function render()
+
+    public function render()
         {
+
+            $query = DashboardReportExports::query();
+
+            if ($this->startDate && $this->endDate) {
+                $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
+            }
+
+            $reports = $query->orderBy('created_at', 'desc')->get();
+
             return view('livewire.user.dashboard', [
 
 

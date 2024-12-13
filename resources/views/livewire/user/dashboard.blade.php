@@ -10,85 +10,92 @@
             <div class="d-flex align-items-center">
 
  <!-- Date Filter -->
-                <div class="d-flex align-items-center mr-3">
 
-                        <input
-                            type="text"
-                            id="dateFilter"
-                            class="form-control mr-3"
-                            wire:model="selectedDate"
-                            placeholder="Select Date"
-                        />
-                    </div>
-                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-                    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+                        <!-- Start Date Input -->
+                        <div class="input-group input-group-sm mr-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Start Date</span>
+                            </div>
+                            <input type="date"
+                                   class="form-control"
+                                   wire:model="startDate">
+                        </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        flatpickr("#dateFilter", {
-            dateFormat: "Y-m-d", // Ensure the format matches your database
-            onChange: function(selectedDates, dateStr, instance) {
-                @this.set('selectedDate', dateStr);
-            }
-        });
-    });
-</script>
-                <div class="d-flex align-items-center mr-3">
-                    <!-- Date Filter Dropdown -->
+                        <!-- End Date Input -->
+                        <div class="input-group input-group-sm mr-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">End Date</span>
+                            </div>
+                            <input type="date"
+                                   class="form-control"
+                                   wire:model="endDate">
+                        </div>
 
 
+                   <!-- EXPORT BUTTON-->
+                        <div class="d-flex justify-content-between align-items-center mb-8">
+                            <button class="btn-download" id="export-btn">
+                                <span class="text">Download Report</span>
+                                <i class="fas fa-download arrow-icon"></i>
+                            </button>
 
-                     <!-- Export Button -->
-                     <div class="dropdown ml-lg-auto ml-3 toolbar-item">
-                                           <!-- Include html2canvas for image capture -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+                        <!-- Include necessary libraries -->
+                            <script src="/path/to/Chart.min.js"></script>
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
-<button onclick="captureGraph()">Export Graph as PDF</button>
 
-<script>
-function captureGraph() {
-    html2canvas(document.getElementById('table1Piechart1')).then(function(canvas) {
-        canvas.toBlob(function(blob) {
-            let formData = new FormData();
-            formData.append('image', blob, 'dashboard-graph.png');
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
-            fetch('{{ route("user.dashboard.save-image") }}', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.reportId) {
-                    window.location.href = `{{ url('user/dashboard/download-pdf') }}/${data.reportId}`;
-                } else {
-                    throw new Error('No reportId received');
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert('An error occurred while processing your request. Please try again.');
-            });
-        }, 'image/png');
-    }).catch(error => {
-        console.error("Error capturing graph:", error);
-        alert('Failed to capture the graph. Please try again.');
-    });
-}
-</script>
+                            <script>
+                            document.getElementById('export-btn').addEventListener('click', function () {
+                                const container = document.querySelector('.container-fluid');
+
+                                // Use html2canvas to capture the entire dashboard
+                                html2canvas(container, {
+                                    scale: 3, // High resolution
+                                    scrollY: -window.scrollY, // Handle scroll offsets
+                                }).then(canvas => {
+                                    // Convert the canvas to a data URL
+                                    const imgData = canvas.toDataURL('image/png');
+
+                                    // Create a new Excel workbook and worksheet
+                                    const workbook = XLSX.utils.book_new();
+                                    const worksheet = {};
+
+                                    // Insert the image into the worksheet
+                                    worksheet['!images'] = [
+                                        {
+                                            image: imgData,
+                                            type: 'png',
+                                            position: {
+                                                type: 'twoCellAnchor',
+                                                from: { col: 0, row: 0 }, // Position the image in the top-left corner
+                                                to: { col: 20, row: 40 }, // Adjust size (rows/columns to occupy)
+                                            }
+                                        }
+                                    ];
+
+                                    // Add the worksheet to the workbook
+                                    XLSX.utils.book_append_sheet(workbook, worksheet, 'Dashboard');
+
+                                    // Save the Excel file
+                                    XLSX.writeFile(workbook, 'dashboard_report.xlsx');
+                                });
+                            });
+                            </script>
                       </div>
                 </div>
             </div>
-            <style>
-                .btn-dark-blue:hover {
-                    background-color: #3676b6; /* Darker Blue for hover effect */
-                    border-color: #3375b8;
-                }
-            </style>
         </div>
+
+
 
     <!-- Bootstrap Carousel for Cards -->
 <div id="cardCarousel" class="carousel slide" data-bs-interval="false">
@@ -244,6 +251,8 @@ function captureGraph() {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
 
 
 
@@ -421,6 +430,7 @@ function captureGraph() {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -509,14 +519,26 @@ document.addEventListener('DOMContentLoaded', function () {
                             return `${tooltipItem.dataset.label}: ₱${value.toLocaleString()}`;
                         }
                     }
+                },
+                datalabels: {
+                    anchor: 'end',  // Position the label at the top of the bar
+                    align: 'end',  // Align the label at the top of the bar
+                    color: '#0d0d0d',  // White text color for visibility
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    },
+                    formatter: function(value) {
+                        return `₱${value.toLocaleString()}`;  // Display the value with a Peso sign
+                    },
+                    offset: 10,  // Adjust the label to be slightly above the bar
                 }
             }
-        }
+        },
+        plugins: [ChartDataLabels]
     });
 });
 </script>
-
-
 
 
 
@@ -541,33 +563,35 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
 
                         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
                         <script>
                             // Data for the chart
-                            const labels = ['Malasakit', 'Onsite', 'Offsite'];  // Labels for different modes
+                            const labels = ['Malasakit', 'Onsite', 'Offsite']; // Labels for different modes
 
+                            // Prepare dataset with counts and amounts
                             const data = {
                                 labels: labels,
                                 datasets: [
                                     {
                                         label: 'Female',
-                                        backgroundColor: 'rgba(255, 99, 132, 0.5)',  // Light red for females
+                                        backgroundColor: 'rgba(255, 99, 132, 0.5)', // Light red for females
                                         borderColor: 'rgba(255, 99, 132, 1)',
                                         borderWidth: 1,
                                         data: [
-                                            {{ $genderCountMalasakit['FEMALE'] ?? 0 }},
-                                            {{ $genderCountOnsite['FEMALE'] ?? 0 }},
-                                            {{ $genderCountOffsite['FEMALE'] ?? 0 }}
+                                            { count: {{ $genderCountMalasakit['FEMALE'] ?? 0 }}, amount: {{ $amountMalasakit['FEMALE'] ?? 0 }} },
+                                            { count: {{ $genderCountOnsite['FEMALE'] ?? 0 }}, amount: {{ $amountOnsite['FEMALE'] ?? 0 }} },
+                                            { count: {{ $genderCountOffsite['FEMALE'] ?? 0 }}, amount: {{ $amountOffsite['FEMALE'] ?? 0 }} }
                                         ]
                                     },
                                     {
                                         label: 'Male',
-                                        backgroundColor: 'rgba(54, 162, 235, 0.5)',  // Blue for males
+                                        backgroundColor: 'rgba(54, 162, 235, 0.5)', // Blue for males
                                         borderColor: 'rgba(54, 162, 235, 1)',
                                         borderWidth: 1,
                                         data: [
-                                            {{ $genderCountMalasakit['MALE'] ?? 0 }},
-                                            {{ $genderCountOnsite['MALE'] ?? 0 }},
-                                            {{ $genderCountOffsite['MALE'] ?? 0 }}
+                                            { count: {{ $genderCountMalasakit['MALE'] ?? 0 }}, amount: {{ $amountMalasakit['MALE'] ?? 0 }} },
+                                            { count: {{ $genderCountOnsite['MALE'] ?? 0 }}, amount: {{ $amountOnsite['MALE'] ?? 0 }} },
+                                            { count: {{ $genderCountOffsite['MALE'] ?? 0 }}, amount: {{ $amountOffsite['MALE'] ?? 0 }} }
                                         ]
                                     }
                                 ]
@@ -576,8 +600,18 @@ document.addEventListener('DOMContentLoaded', function () {
                             // Config for the chart
                             const config = {
                                 type: 'bar',
-                                data: data,
+                                data: {
+                                    labels: data.labels,
+                                    datasets: data.datasets.map(dataset => ({
+                                        label: dataset.label,
+                                        backgroundColor: dataset.backgroundColor,
+                                        borderColor: dataset.borderColor,
+                                        borderWidth: dataset.borderWidth,
+                                        data: dataset.data.map(entry => entry.count) // Use count for the bar heights
+                                    }))
+                                },
                                 options: {
+                                    responsive: true,
                                     scales: {
                                         y: {
                                             beginAtZero: true,
@@ -595,32 +629,31 @@ document.addEventListener('DOMContentLoaded', function () {
                                         tooltip: {
                                             callbacks: {
                                                 label: function(tooltipItem) {
-                                                    let dataset = tooltipItem.dataset;
-                                                    let value = dataset.data[tooltipItem.dataIndex];
-                                                    let amount;
-                                                    if (tooltipItem.datasetIndex === 0) {  // Female dataset
-                                                        if (tooltipItem.dataIndex === 0) {
-                                                            amount = {{ $amountMalasakit['FEMALE'] ?? 0 }};
-                                                        } else if (tooltipItem.dataIndex === 1) {
-                                                            amount = {{ $amountOnsite['FEMALE'] ?? 0 }};
-                                                        } else {
-                                                            amount = {{ $amountOffsite['FEMALE'] ?? 0 }};
-                                                        }
-                                                    } else {  // Male dataset
-                                                        if (tooltipItem.dataIndex === 0) {
-                                                            amount = {{ $amountMalasakit['MALE'] ?? 0 }};
-                                                        } else if (tooltipItem.dataIndex === 1) {
-                                                            amount = {{ $amountOnsite['MALE'] ?? 0 }};
-                                                        } else {
-                                                            amount = {{ $amountOffsite['MALE'] ?? 0 }};
-                                                        }
-                                                    }
-                                                    return dataset.label + ": " + value + ' (₱' + amount.toLocaleString() + ')';
+                                                    const dataset = tooltipItem.dataset;
+                                                    const entry = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.dataIndex];
+                                                    return `${dataset.label}: ${entry.count} clients (₱${entry.amount.toLocaleString()})`;
                                                 }
                                             }
+                                        },
+                                        datalabels: {
+                                            anchor: 'end',  // Position the label at the top of the bar
+                                            align: 'end',   // Align the label at the end of the bar
+                                            color: '#000',  // Black text color for visibility
+                                            font: {
+                                                size: 12,
+                                                weight: 'bold'
+                                            },
+                                            formatter: function(value, context) {
+                                                const datasetIndex = context.datasetIndex;
+                                                const dataIndex = context.dataIndex;
+                                                const entry = data.datasets[datasetIndex].data[dataIndex];
+                                                return `${entry.count} clients\n₱${entry.amount.toLocaleString()}`; // Show count and total amount
+                                            },
+                                            offset: -10 // Position the label slightly above the bar
                                         }
                                     }
-                                }
+                                },
+                                plugins: [ChartDataLabels] // Include the datalabels plugin
                             };
 
                             // Render the chart
@@ -629,6 +662,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 config
                             );
                         </script>
+
 
 
 <div class="container-fluid mt-3">
@@ -653,8 +687,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             </div>
                         </div>
 
-
                         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
                         <script>
                             document.addEventListener('DOMContentLoaded', function () {
                                 const ctx = document.getElementById('budgetChart').getContext('2d');
@@ -666,8 +700,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                 const gradient = ctx.createLinearGradient(0, 0, 0, 400);
                                 gradient.addColorStop(0, 'rgba(30, 144, 255, 1)'); // Darker blue
                                 gradient.addColorStop(1, 'rgba(0, 50, 100, 1)'); // Darker blue
-
-                                const formattedData = data.map(amount => `₱${amount.toLocaleString()}`); // Format data as PHP
 
                                 const budgetChart = new Chart(ctx, {
                                     type: 'bar',
@@ -682,6 +714,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         }]
                                     },
                                     options: {
+                                        responsive: true,
                                         scales: {
                                             y: {
                                                 beginAtZero: true,
@@ -702,133 +735,178 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 callbacks: {
                                                     label: function(tooltipItem) {
                                                         const { dataset, raw } = tooltipItem;
-                                                        return `${dataset.label}: ${raw} (₱${raw.toLocaleString()})`; // Custom tooltip format
+                                                        return `${dataset.label}: ₱${raw.toLocaleString()}`; // Custom tooltip format
                                                     }
                                                 }
+                                            },
+                                            datalabels: {
+                                                anchor: 'end',  // Position the label at the top of the bar
+                                                align: 'end',   // Align the label at the end of the bar
+                                                color: '#000',  // Black text color for visibility
+                                                font: {
+                                                    size: 12,
+                                                    weight: 'bold'
+                                                },
+                                                formatter: function(value) {
+                                                    return `₱${value.toLocaleString()}`;  // Format the label with Peso sign
+                                                },
+                                                offset: -5,  // Position the label slightly above the bar
                                             }
                                         }
-                                    }
+                                    },
+                                    plugins: [ChartDataLabels] // Include the datalabels plugin
                                 });
                             });
                         </script>
 
-
-
-<!-- CHARTS AND GRAPHS SECTION -->
-
+<!-- Chart Script -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
-
-<!-- Table 1 Pie Charts -  'table1PieChart1' -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Data for Client Category Distribution
-        let clientCategoryData = @json($clientCategoryData);
-        let clientCategories = Object.keys(clientCategoryData);  // Short labels
-        let assistanceAmounts = Object.values(clientCategoryData);
+document.addEventListener('DOMContentLoaded', function () {
+    // Data for Bar Chart
+    let clientCategoryData = @json($clientCategoryData);
+    let clientCategories = Object.keys(clientCategoryData); // Extract categories
+    let assistanceAmounts = Object.values(clientCategoryData); // Extract amounts
 
-        // Bar Chart: Client Category Distribution
-        var ctx1 = document.getElementById('table1Piechart1').getContext('2d');
-        var table1Piechart1 = new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: clientCategories,
-                datasets: [{
-                    label: 'Client With Most Assistance Released',
-                    data: assistanceAmounts,
-                    backgroundColor: ['#DC143C', '#ffcc00', '#223D8D', '#E6F69D', '#ef8585e2', '#223D8D', '#2D87BB'],
-                    borderColor: ['#e6e6e6'],
-                    borderWidth: 1
-                }]
+    // Bar Chart: Client With Most Assistance Released
+    var ctx1 = document.getElementById('table1Piechart1').getContext('2d');
+    var table1Piechart1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: clientCategories,
+            datasets: [{
+                label: 'Client With Most Assistance Released',
+                data: assistanceAmounts,
+                backgroundColor: ['#DC143C', '#ffcc00', '#223D8D', '#E6F69D', '#ef8585e2', '#223D8D', '#2D87BB'],
+                borderColor: ['#e6e6e6'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'left',
+                    labels: {
+                        boxWidth: 0,
+                        padding: 10,
+                        font: { size: 12 }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: context => `${context.label}: PHP ${context.raw.toLocaleString()}`
+                    }
+                },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'end',
+                    color: '#000',
+                    font: {
+                        size: 12,
+                        weight: 'bold'
+                    },
+                    formatter: function(value) {
+                        return `₱${value.toLocaleString()}`;  // Display the value with a Peso sign
+                    }  // <-- Closing bracket added here
+                }
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'left',
-                        labels: {
-                            boxWidth: 0,
-                            padding: 10,
-                            font: { size: 12 }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: context => `${context.label}: PHP ${context.raw.toLocaleString()}`
-                        }
+            layout: {
+                padding: {
+                    top: 10
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        autoSkip: false,
                     }
                 },
-                layout: {
-                    padding: {
-                        top: 10
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            autoSkip: false,
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return 'PHP ' + value.toLocaleString();
-                            }
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return 'PHP ' + value.toLocaleString();
                         }
                     }
                 }
             }
-        });
-
-        // Data for Age Bracket Distribution
-        let ageBracketData = @json($ageBracketData);
-        let ageBracketLabels = ['0-13', '14-17', '18-29', '30-44', '45-59', '60-70', '71-79', '80+'];
-        let clientCounts = Object.values(ageBracketData);
-
-        // Pie Chart 2: Age Distribution Per Gender
-        var ctx2 = document.getElementById('table1Piechart2').getContext('2d');
-        var table1Piechart2 = new Chart(ctx2, {
-            type: 'pie',
-            data: {
-                labels: ageBracketLabels,
-                datasets: [{
-                    label: 'Number of Clients',
-                    data: clientCounts,
-                    backgroundColor: ['#DC143C', '#1A5319', '#11235A', '#FDA403', '#ef8585e2', '#223D8D', '#2D87BB', '#AADEA7'],
-                    borderColor: ['#e6e6e6'],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'left',
-                        labels: {
-                            boxWidth: 0,
-                            padding: 10,
-                            font: { size: 12 }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: context => `${context.label}: ${context.raw.toLocaleString()} clients`
-                        }
-                    }
-                }
-            }
-        });
-
-        // Resize event handling for both charts
-        window.addEventListener('resize', function () {
-            table1Piechart1.resize();
-            table1Piechart2.resize();
-        });
+        },
+        plugins: [ChartDataLabels]
     });
-    </script>
+
+    // Data for Pie Chart
+    let ageBracketData = @json($ageBracketData);
+    let ageBracketLabels = ['0-13', '14-17', '18-29', '30-44', '45-59', '60-70', '71-79', '80+'];
+    let clientCounts = Object.values(ageBracketData);
+
+    // Pie Chart: Age Distribution Per Gender
+    var ctx2 = document.getElementById('table1Piechart2').getContext('2d');
+    var table1Piechart2 = new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: ageBracketLabels,
+            datasets: [{
+                label: 'Number of Clients',
+                data: clientCounts,
+                backgroundColor: ['#DC143C', '#1A5319', '#11235A', '#FDA403', '#ef8585e2', '#223D8D', '#2D87BB', '#AADEA7'],
+                borderColor: ['#e6e6e6'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        boxWidth: 10,
+                        padding: 20,
+                        font: { size: 12 },
+                        textAlign: 'left'
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: context => `${context.label}: ${context.raw.toLocaleString()} clients`
+                    }
+                },
+                datalabels: {
+                    color: '#fff',
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    },
+                    formatter: (value, context) => {
+                        let label = context.chart.data.labels[context.dataIndex];
+                        return `${value.toLocaleString()} clients`;  // Display only value
+                    },
+                    anchor: 'end',
+                    align: 'start',
+                    offset: 15
+                }
+            },
+            layout: {
+                padding: {
+                    right: 30
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+
+    // Resize handling
+    window.addEventListener('resize', function () {
+        table1Piechart1.resize();
+        table1Piechart2.resize();
+    });
+});
+</script>
+
 
 
 
@@ -941,98 +1019,6 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-<!-- Table 5 Pie Charts -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Fetch Mode of Admission Data (Pie Chart 1)
-        let modeOfAdmissionData = @json($table5ModeOfAdmissionData);
-        let modeLabels = Object.keys(modeOfAdmissionData);
-        let modeValues = Object.values(modeOfAdmissionData);
-
-        // Pie Chart 1: Mode of Admission
-        var ctx8 = document.getElementById('table5PieChart1').getContext('2d');
-        var table5PieChart1 = new Chart(ctx8, {
-            type: 'doughnut',
-            data: {
-                labels: modeLabels,
-                datasets: [{
-                    label: 'Mode of Admission',
-                    data: modeValues,
-                    backgroundColor: ['#C40C0C','#1E2A5E'],
-                    borderColor: ['#e6e6e6', '#e6e6e6'],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'left',
-                        labels: {
-                            boxWidth: 15,
-                            padding: 10,
-                            usePointStyle: true,
-                            font: { size: 12 }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function (context) {
-                                let label = context.label || '';
-                                let value = context.raw || 0;
-                                return `${label}: ${value.toLocaleString()}`;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        // Fetch Gender Distribution Data (Pie Chart 2)
-        let genderData = @json($table5GenderDistributionData);
-        let genderLabels = Object.keys(genderData);
-        let genderValues = Object.values(genderData);
-
-        // Pie Chart 2: Distribution Per Gender
-        var ctx9 = document.getElementById('table5PieChart2').getContext('2d');
-        var table5PieChart2 = new Chart(ctx9, {
-            type: 'doughnut',
-            data: {
-                labels: genderLabels,
-                datasets: [{
-                    label: 'Distribution Per Gender',
-                    data: genderValues,
-                    backgroundColor: ['#1E2A5E', '#C40C0C'],
-                    borderColor: ['#e6e6e6', '#e6e6e6'],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                            boxWidth: 15,
-                            padding: 10,
-                            usePointStyle: true,
-                            font: { size: 12 }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function (context) {
-                                let label = context.label || '';
-                                let value = context.raw || 0;
-                                return `${label}: ${value.toLocaleString()}`;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    });
-</script>
 
 <script>
     document.addEventListener('livewire:load', function () {
@@ -1081,32 +1067,38 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
-
-<!-- Table 6 Piecharts -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Fetch Mode of Admission Data (Pie Chart 1)
-        let modeOfAdmissionData = @json($table6ModeOfAdmissionData);
-        let modeLabels = Object.keys(modeOfAdmissionData);
-        let modeValues = Object.values(modeOfAdmissionData);
+        // Adjusted configuration for table5PieChart1
+        let modeOfAdmissionData5 = @json($table5ModeOfAdmissionData);
+        let modeLabels5 = Object.keys(modeOfAdmissionData5);
+        let modeValues5 = Object.values(modeOfAdmissionData5);
 
-        // Pie Chart 1: Mode of Admission
-        var ctx8 = document.getElementById('table6PieChart1').getContext('2d');
-        var table6PieChart1 = new Chart(ctx8, {
+        document.getElementById('table5PieChart1').style.width = '450px';
+        document.getElementById('table5PieChart1').style.height = '450px';
+
+        var ctx5 = document.getElementById('table5PieChart1').getContext('2d');
+        var table5PieChart1 = new Chart(ctx5, {
             type: 'doughnut',
             data: {
-                labels: modeLabels,
+                labels: modeLabels5,
                 datasets: [{
                     label: 'Mode of Admission',
-                    data: modeValues,
-                    backgroundColor: ['#C40C0C', '#FDA403', '#223D8D' ],
-                    borderColor: ['#e6e6e6', '#e6e6e6', '#e6e6e6'],
+                    data: modeValues5,
+                    backgroundColor: ['#C40C0C', '#1E2A5E'],
+                    borderColor: ['#e6e6e6', '#e6e6e6'],
                     borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: 20
+                },
                 plugins: {
                     legend: {
                         position: 'left',
@@ -1125,68 +1117,104 @@ document.addEventListener('DOMContentLoaded', function () {
                                 return `${label}: ${value.toLocaleString()}`;
                             }
                         }
+                    },
+                    datalabels: {
+                        anchor: 'end', // Move labels outside
+                        align: 'end',
+                        formatter: (value, context) => {
+                            return `${context.chart.data.labels[context.dataIndex]}: ${value}`;
+                        },
+                        font: {
+                            size: 10,
+                            weight: 'bold'
+                        },
+                        color: '#000',
+                        padding: 8 // Add space between labels and slices
                     }
                 }
-            }
+            },
+            plugins: [ChartDataLabels]
         });
+    });
+</script>
 
-        // Fetch Gender Distribution Data (Pie Chart 2)
-        let genderData = @json($table6GenderDistributionData);
-        let genderLabels = Object.keys(genderData);
-        let genderValues = Object.values(genderData);
 
-        // Pie Chart 2: Distribution Per Gender
-        var ctx9 = document.getElementById('table6PieChart2').getContext('2d');
-        var table6PieChart2 = new Chart(ctx9, {
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Adjusted configuration for table6PieChart1
+        let modeOfAdmissionData6 = @json($table6ModeOfAdmissionData);
+        let modeLabels6 = Object.keys(modeOfAdmissionData6);
+        let modeValues6 = Object.values(modeOfAdmissionData6);
+
+        // Set canvas size (larger size to accommodate labels)
+        document.getElementById('table6PieChart1').style.width = '500px';
+        document.getElementById('table6PieChart1').style.height = '500px';
+
+        var ctx6 = document.getElementById('table6PieChart1').getContext('2d');
+        var table6PieChart1 = new Chart(ctx6, {
             type: 'doughnut',
             data: {
-                labels: genderLabels,
-                datasets: [{
-                    label: 'Distribution Per Gender',
-                    data: genderValues,
-                    backgroundColor: ['#AADEA7', '#223D8D'],
-                    borderColor: ['#e6e6e6', '#e6e6e6'],
-                    borderWidth: 1
-                }]
+                labels: modeLabels6.map(label => label.toUpperCase()), // Convert labels to uppercase
+                datasets: [
+                    {
+                        label: 'Mode of Admission',
+                        data: modeValues6,
+                        backgroundColor: ['#C40C0C', '#FDA403', '#223D8D'],
+                        borderColor: ['#e6e6e6', '#e6e6e6', '#e6e6e6'],
+                        borderWidth: 1,
+                    },
+                ],
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: 30, // Add extra padding for data labels
+                },
                 plugins: {
                     legend: {
-                        position: 'top',
+                        position: 'left',
                         labels: {
                             boxWidth: 15,
                             padding: 10,
                             usePointStyle: true,
-                            font: { size: 12 }
-                        }
+                            font: { size: 12 },
+                        },
                     },
                     tooltip: {
                         callbacks: {
                             label: function (context) {
                                 let label = context.label || '';
                                 let value = context.raw || 0;
-                                return `${label}: ${value.toLocaleString()}`;
-                            }
-                        }
-                    }
-                }
-            }
+                                return `${label.toUpperCase()}: ${value.toLocaleString()}`; // Tooltip in uppercase
+                            },
+                        },
+                    },
+                    datalabels: {
+                        anchor: 'end', // Place labels outside the slices
+                        align: 'end', // Align labels to end
+                        formatter: (value, context) => {
+                            return `${context.chart.data.labels[context.dataIndex].toUpperCase()}: ${value}`;
+                        },
+                        font: {
+                            size: 12,
+                            weight: 'bold',
+                        },
+                        color: '#000',
+                        padding: 10, // Adjust padding to prevent overlapping
+                        clip: false, // Ensure labels are not clipped
+                    },
+                },
+            },
+            plugins: [ChartDataLabels],
         });
     });
 </script>
 
 
 
-
-    <script src="/path/to/Chart.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
         .progress-bar-custom {
             height: 30px;
@@ -1275,8 +1303,65 @@ document.addEventListener('DOMContentLoaded', function () {
         /* Optional: Hover effect to highlight the arrow */
         .custom-carousel-control:hover .custom-arrow i {
             color: darkblue; /* Darker shade when hovered */
+
+        }
+        .input-group-text {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .form-control-sm {
+            font-size: 14px;
+        }
+        .btn-download {
+            display: flex;
+            flex-direction: row; /* Arrange items in a row */
+            align-items: center; /* Center items vertically */
+            justify-content: center; /* Align items horizontally */
+            padding: 2px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 20px; /* Rounded sides */
+            background-color: #0654a8;
+            color: #fff;
+            text-align: center;
+            white-space: nowrap; /* Prevent text wrapping */
+            width: auto; /* Allow flexible width */
+            height: 60px; /* Maintain consistent height */
+            position: relative;
+            cursor: pointer;
+        }
+
+        .btn-download .text {
+            margin-right: 10px; /* Add spacing between the text and arrow */
+            font-weight: bold;
+        }
+
+        .btn-download .arrow-icon {
+            font-size: 16px; /* Adjust icon size */
+        }
+        @media print {
+        /* Hide unnecessary elements during print/export */
+        .btn-download, #export-btn {
+            display: none;
+        }
+
+        /* Adjust chart size for better export */
+        canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
+    }
+    .filter-section, .export-button, .dashboard-title {
+    display: none !important;
+    }
+
+        .btn-download:hover {
+            background-color: #054a8c; /* Slightly darker blue on hover */
+            transform: scale(1.05); /* Slightly enlarges the button on hover */
         }
 
 
-    </style>
-</div>
+        </style>
+    </div>
+
